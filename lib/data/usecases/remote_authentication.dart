@@ -1,6 +1,5 @@
+import 'package:fordev/domain/usecases/authentication.dart';
 import 'package:meta/meta.dart';
-
-import '../../domain/usecases/usecases.dart';
 
 import '../http/http.dart';
 
@@ -14,7 +13,22 @@ class RemoteAuthentication {
     await httpClient.request(
       url: url,
       method: 'post',
-      body: params.toJson(),
+      body: RemoteAuthenticationParams.fromDomain(params).toJson(),
     );
   }
+}
+
+class RemoteAuthenticationParams {
+  final String email;
+  final String password;
+
+  RemoteAuthenticationParams({
+    @required this.email,
+    @required this.password,
+  });
+
+  factory RemoteAuthenticationParams.fromDomain(AuthenticationParams params) =>
+      RemoteAuthenticationParams(email: params.email, password: params.secret);
+
+  Map toJson() => {'email': this.email, 'password': this.password};
 }
