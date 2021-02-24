@@ -30,6 +30,15 @@ void main() {
   test(
     'Should call HttpClient with correct values',
     () async {
+      final accesToken = faker.guid.guid();
+      when(
+        httpClient.request(
+          url: anyNamed('url'),
+          method: anyNamed('method'),
+          body: anyNamed('body'),
+        ),
+      ).thenAnswer((realInvocation) async =>
+          {'acessToken': accesToken, 'name': faker.person.name()});
       await sut.auth(params);
 
       verify(
@@ -69,7 +78,7 @@ void main() {
 
   test(
     'Should throw UnexpectedError if HttpClient returns 404',
-        () async {
+    () async {
       when(
         httpClient.request(
           url: anyNamed('url'),
@@ -94,7 +103,7 @@ void main() {
 
   test(
     'Should throw UnexpectedError if HttpClient returns 500',
-        () async {
+    () async {
       when(
         httpClient.request(
           url: anyNamed('url'),
@@ -119,7 +128,7 @@ void main() {
 
   test(
     'Should throw InvalidCredentialsError if HttpClient returns 401',
-        () async {
+    () async {
       when(
         httpClient.request(
           url: anyNamed('url'),
@@ -138,6 +147,32 @@ void main() {
       expect(
         future,
         throwsA(DomainError.invalidCredentials),
+      );
+    },
+  );
+
+  test(
+    'Should return an Account if HttpClient returns 200',
+    () async {
+      final accesToken = faker.guid.guid();
+      when(
+        httpClient.request(
+          url: anyNamed('url'),
+          method: anyNamed('method'),
+          body: anyNamed('body'),
+        ),
+      ).thenAnswer(
+        (realInvocation) async => {
+          'accessToken': accesToken,
+          'name': faker.person.name(),
+        },
+      );
+
+      final account = await sut.auth(params);
+
+      expect(
+        account.token,
+        accesToken,
       );
     },
   );
