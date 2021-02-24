@@ -13,6 +13,7 @@ class HttpClientSpy extends Mock implements HttpClient {}
 
 void main() {
   RemoteAuthentication sut;
+  AuthenticationParams params;
   HttpClientSpy httpClient;
   String url;
 
@@ -20,15 +21,15 @@ void main() {
     httpClient = HttpClientSpy();
     url = faker.internet.httpsUrl();
     sut = RemoteAuthentication(httpClient: httpClient, url: url);
+    params = AuthenticationParams(
+      email: faker.internet.email(),
+      secret: faker.internet.password(),
+    );
   });
 
   test(
     'Should call HttpClient with correct values',
     () async {
-      final params = AuthenticationParams(
-        email: faker.internet.email(),
-        secret: faker.internet.password(),
-      );
       await sut.auth(params);
 
       verify(
