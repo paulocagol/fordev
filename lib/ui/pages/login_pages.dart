@@ -30,7 +30,7 @@ class LoginPage extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 8, bottom: 32),
                       child: TextFormField(
                         decoration: InputDecoration(
-                          labelText: 'Password',
+                          labelText: 'Senha',
                           icon: Icon(
                             Icons.lock,
                             color: Theme.of(context).primaryColorLight,
@@ -40,7 +40,7 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     RaisedButton(
-                      onPressed: () {},
+                      onPressed: null,
                       child: Text(
                         'Entrar'.toUpperCase(),
                       ),
