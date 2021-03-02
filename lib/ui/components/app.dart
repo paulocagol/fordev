@@ -42,8 +42,7 @@ class App extends StatelessWidget {
             splashColor: primaryColorLigth,
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             textTheme: ButtonTextTheme.primary,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20))),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
       ),
       home: LoginPage(null),
     );
