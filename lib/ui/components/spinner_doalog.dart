@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 
 void showLoading(BuildContext context) {
   showDialog(
-    context: context,
-    barrierDismissible: false,
-    child: SimpleDialog(
+    builder: (context) => SimpleDialog(
       children: [
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -15,7 +13,8 @@ void showLoading(BuildContext context) {
           ],
         ),
       ],
-    ),
+    ), context: context,
+    barrierDismissible: false,
   );
 }
 
