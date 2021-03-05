@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fordev/main/factories/pages/login/login_page_factory.dart';
+import 'package:fordev/main/factories/pages/splash/splash.dart';
 import 'package:fordev/ui/components/components.dart';
 import 'package:get/get.dart';
 
@@ -16,10 +17,23 @@ class App extends StatelessWidget {
       title: '4Dev',
       debugShowCheckedModeBanner: false,
       theme: makeAppTheme(),
-      initialRoute: '/login',
+      initialRoute: '/',
       getPages: [
-        GetPage(name: '/login', page: makeLoginPage),
-        GetPage(name: '/surveys', page: () => Scaffold(body: Text('Enquetes'))),
+        GetPage(
+          name: '/',
+          page: makeSplashnPage,
+          transition: Transition.fade,
+        ),
+        GetPage(
+          name: '/login',
+          page: makeLoginPage,
+          transition: Transition.fadeIn,
+        ),
+        GetPage(
+          name: '/surveys',
+          page: () => Scaffold(body: Text('Enquetes')),
+          transition: Transition.fadeIn,
+        ),
       ],
     );
   }
