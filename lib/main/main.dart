@@ -3,9 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:fordev/main/factories/pages/login/login_page_factory.dart';
 import 'package:fordev/main/factories/pages/splash/splash.dart';
 import 'package:fordev/ui/components/components.dart';
+import 'package:fordev/utils/i18n/resources.dart';
 import 'package:get/get.dart';
 
 void main() {
+  R.load(Locale('en', 'US'));
   runApp(App());
 }
 
